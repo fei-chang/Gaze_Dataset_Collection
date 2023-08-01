@@ -1,6 +1,6 @@
 # Gaze Dataset Collection
 
-
+## Collected Dataset
 <details>
 <summary> GP-Static(Published)</summary>
 
@@ -59,4 +59,42 @@ The dataset is designed for the static and dynamic gaze pattern classification t
 <details>
 <summary> ShanghaiASD_20230531 (Under Construction)</summary>
 ### ShanghaiASD_20230531 (Under Construction)
+</details>
+
+
+## Collection Tools
+<details>
+<summary> PersonTracker </summary>
+  
+In file: `PersonTracker.py`, used for tracking the target person from unlabeled heads across frames.
+
+Usage:
+```python
+person_tracker = PersonTracker()
+raw_head_detections = 'path_to_raw_annotations/raw_detections.txt'
+person_tracker.load_from_files(raw_head_detections, frame_dir)
+target_person = 'kid'
+person_tracker.track_person(target_person)
+df = person_tracker.get_person_df(target_person)
+
+person_tracker.release()
+```
+
+Track multiple people
+```python
+person_tracker = PersonTracker()
+raw_head_detections = 'path_to_raw_annotations/raw_detections.txt'
+person_tracker.load_from_files(raw_head_detections, frame_dir)
+target_IDs = ['p1', 'p2', 'p3']
+for personID in target_IDs:
+  person_tracker.track_person(personID)
+df = person_tracker.get_full_df()
+
+person_tracker.release()
+```
+
+ **raw_detections.txt** 
+ - :x: No column header, entries are added as `['frameID', 'xmin', 'ymin', 'xmax', 'ymax']`
+ - :x: No index column
+ - Entries of 'xmin', 'ymin', 'xmax', 'ymax' are all in 0-1 scale
 </details>
