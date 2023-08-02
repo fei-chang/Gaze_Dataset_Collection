@@ -63,8 +63,17 @@ The dataset is designed for the static and dynamic gaze pattern classification t
 
 
 ## Collection Tools
+
 <details>
-<summary> PersonTracker </summary>
+<summary> Head Detection </summary>
+  
+In repo [Tool_head_detector](https://github.com/fei-chang/Tool_head_detector/tree/main), used for detect heads in frames.
+
+</details>
+
+
+<details>
+<summary> Person Tracking </summary>
   
 In file: `PersonTracker.py`, used for tracking the target person from unlabeled heads across frames.
 
@@ -93,8 +102,8 @@ df = person_tracker.get_full_df()
 person_tracker.release()
 ```
 
- **raw_detections.txt** 
- - :x: No column header, entries are added as `['frameID', 'xmin', 'ymin', 'xmax', 'ymax']`
+ **Note on input file format: raw_detections.txt** 
+ - :x: No column header, entries are organized as `['frameID', 'label', 'xmin', 'ymin', 'xmax', 'ymax']`
  - :x: No index column
  - Entries of 'xmin', 'ymin', 'xmax', 'ymax' are all in 0-1 scale
 </details>
