@@ -107,3 +107,26 @@ person_tracker.release()
  - :x: No index column
  - Entries of 'xmin', 'ymin', 'xmax', 'ymax' are all in 0-1 scale
 </details>
+
+<details>
+<summary> Annotation Tool </summary>
+  
+At [CVAT Online](http://43.138.12.230:8080/), used for create annotations on videos. Some helper functions can be found at `cvat_utils.py`
+
+Usage:
+1. Conver exported cvat annotation file to dictionary. (Exported format: CVAT for video 1.1)
+```python
+from cvat_utils import cvat2dict
+
+info_dict = cvat2dict('path/to/cvat_annotations.xml')
+
+```
+**Note**
+- 在使用网页（尤其是上传视频数据）时，建议关闭VPN，会卡顿。
+- Advanced Configuration中，建议不要选取 Use zip/video chunks 选项，该选项容易造成在视频在个别帧数间卡顿现象。
+- Advanced Configuration中，Segment Size控制每个Job的帧数，Chunk size则控制系统在分包时，每一个分开的压缩包中图像的数量。对于过长的视频，建议选取Segment Size进行控制每个Job的时长，同时每个Segment的时长应设为Chunck size的整数倍。
+- 在进行标注时，遇到卡顿现象可以通过'F'键前进一帧，强制加载下一帧跳过卡顿。
+- 在进行标注时，不建议大范围拖动进度条，会卡顿。
+- 更多使用指南以及操作可见CVAT[官方指南](https://opencv.github.io/cvat/docs/getting_started/) 与[Repo](https://github.com/opencv/cvat).
+  
+</details>
