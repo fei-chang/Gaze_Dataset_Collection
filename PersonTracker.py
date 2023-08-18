@@ -288,6 +288,12 @@ class PersonTracker:
                     f = skip_end
             
             # Case 2: the given anthor can be used
+            
+            if f not in frame_ls:
+                # If encounter missing frames in the dataframe, just increment and ignore
+                f+=1 
+                continue
+                
             bboxes = grouped_df.get_group(f) # annotations of heads at current frame
             overlappings = {}
             confusion = {}
