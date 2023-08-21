@@ -121,7 +121,11 @@ class PersonTracker:
             print(self.tracked_dfs.keys())
 
         else:
-            return self.tracked_dfs[personID]
+            person_df = pd.concat(self.tracked_dfs[personID]).sort_values('frameID').reset_index(drop=True)
+            return person_df
+    
+    def get_tracked_person(self):
+        return self.tracked_dfs.keys()
     
     def get_full_df(self):
         dfs = list(self.tracked_dfs.values())
@@ -164,7 +168,11 @@ class PersonTracker:
                 end_frame
             )
             if not tracked_df is None:
-                self.tracked_dfs[personID] = tracked_df
+                if not (personID in self.tracked_dfs.keys()):
+                    self.tracked_dfs[personID] = []
+
+                self.tracked_dfs[personID].append(tracked_df)
+
                 new_proposal = pd.merge(self.proposal_df, tracked_df, how = 'left', indicator = True)# Remove used annotations
                 new_proposal = new_proposal[new_proposal['_merge']=='left_only']
                 del new_proposal['_merge']
@@ -288,12 +296,10 @@ class PersonTracker:
                     f = skip_end
             
             # Case 2: the given anthor can be used
-            
             if f not in frame_ls:
                 # If encounter missing frames in the dataframe, just increment and ignore
                 f+=1 
                 continue
-                
             bboxes = grouped_df.get_group(f) # annotations of heads at current frame
             overlappings = {}
             confusion = {}
@@ -360,3 +366,4 @@ class PersonTracker:
             return None
 
         return interpolated
+
