@@ -8,7 +8,7 @@ import numpy as np
 import cv2
 
 from utils import cv2_safe_read, cv2_safe_write
-
+cv2.des
 class PopupWindow:
     def __init__(self, img_array:np.array, stage: str, person_name:str):
         '''
@@ -23,7 +23,9 @@ class PopupWindow:
         decision (str): a decision based on the show up image
         '''
         self.result = None
-
+        cv2.namedWindow('img',cv2.WINDOW_NORMAL)
+        cv2.resizeWindow('img', 800, 600)
+        cv2.imshow('img',img_array)
         # Create Window
         self.master = tk.Tk() 
         self.master.geometry("700x440")
@@ -36,50 +38,51 @@ class PopupWindow:
         self.master.geometry(f'+{50}+{50}')
 
         # Create the widgets
-        self.label = tk.Label(self.master, image=self.photo)
-        self.label.grid(row=0, column=0, columnspan=8)
+        #self.label = tk.Label(self.master, image=self.photo)
+        #self.label.grid(row=0, column=0, columnspan=8)
 
         self.stage_label = tk.Label(self.master, text=stage, fg='black', font=('TkDefaultFont', 10, 'bold'), anchor='w')
-        self.stage_label.grid(row=1, column=0)
+        self.stage_label.grid(row=0, column=0)
 
         self.message_label = tk.Label(self.master, text='Is this a head annotation on the', anchor='e')
-        self.message_label.grid(row=1, column=1)
+        self.message_label.grid(row=0, column=1)
 
         self.person_label = tk.Label(self.master, text=person_name, fg='red', anchor='w')
-        self.person_label.grid(row=1, column=2)
+        self.person_label.grid(row=0, column=2)
 
 
         self.yes_button = tk.Button(self.master, text='Yes', command=self.yes)
-        self.yes_button.grid(row=2, column=3)
+        self.yes_button.grid(row=1, column=3)
         
         self.no_button = tk.Button(self.master, text='No', command=self.no)
-        self.no_button.grid(row=2, column=4)
+        self.no_button.grid(row=1, column=4)
 
 
         self.skip_button = tk.Button(self.master, text='Skip', command=self.skip)
-        self.skip_button.grid(row=2, column=5)
+        self.skip_button.grid(row=1, column=5)
 
 
         self.terminate_button = tk.Button(self.master, text='Terminate and Drop', command=self.terminate)
-        self.terminate_button.grid(row=2, column=6)
+        self.terminate_button.grid(row=1, column=6)
+        cv2.waitKey(0)
         self.master.mainloop()
         
     def yes(self):
         self.result = 'Yes'
         self.master.destroy()
-        
+        cv2.destroyAllWindows()
     def no(self):
         self.result = 'No'
         self.master.destroy()
-        
+        cv2.destroyAllWindows()
     def skip(self):
         self.result = 'Skip'
         self.master.destroy()
-        
+        cv2.destroyAllWindows()
     def terminate(self):
         self.result = 'Terminate and Drop'
         self.master.destroy()
-    
+        cv2.destroyAllWindows()
 
     def get_result(self):
         return self.result
