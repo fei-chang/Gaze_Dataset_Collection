@@ -31,8 +31,8 @@ class PopupWindow:
         self.master.geometry("700x440")
 
         # Load the image
-        img_pil = Image.fromarray(cv2.cvtColor(img_array, cv2.COLOR_BGR2RGB))
-        self.photo = ImageTk.PhotoImage(img_pil)
+        #img_pil = Image.fromarray(cv2.cvtColor(img_array, cv2.COLOR_BGR2RGB))
+        #self.photo = ImageTk.PhotoImage(img_pil)
 
         self.master.update_idletasks()
         self.master.geometry(f'+{50}+{50}')
