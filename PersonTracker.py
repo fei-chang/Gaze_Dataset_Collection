@@ -104,11 +104,11 @@ class PersonTracker:
         self.overlap_upper = overlap_upper
         self.overlap_lower = overlap_lower
 
-
+        self.remote=False
         self.tracked_dfs = {}
         self.frame_dir = None
         self.proposal_df = None
-        self.dropped_frame=[]
+        self.dropped_frames=[]
 
     def release(self):
         self.tracked_dfs = {}
