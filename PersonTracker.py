@@ -1,5 +1,5 @@
 import os
-
+import paramiko
 import tkinter as tk
 from PIL import Image, ImageTk
 
@@ -87,7 +87,7 @@ class PopupWindow:
 class PersonTracker:
     def __init__(self, 
                 skip_prev_f = 1,
-                skip_follow_f = 15,
+                skip_follow_f = 1,
                 overlap_upper =  0.60,
                 overlap_lower = 0.2):        
         '''
@@ -108,11 +108,17 @@ class PersonTracker:
         self.tracked_dfs = {}
         self.frame_dir = None
         self.proposal_df = None
+        self.dropped_frame=[]
 
     def release(self):
         self.tracked_dfs = {}
         self.frame_dir = None
         self.proposal_df = None
+
+    def set_remote_connection(self, remote_frame_dir:str, sftp:paramiko.SFTPClient):
+        self.remote_frame_dir = remote_frame_dir
+        self.sftp = sftp
+        self.remote = True
 
     def get_person_df(self, personID):
         if not personID in self.tracked_dfs:
@@ -204,6 +210,12 @@ class PersonTracker:
         '''
         Get an head image with head annotations to show in the Pop_up Window
         '''
+        if self.remote:
+            # Download frame to local
+            remote_frame_path = '%s/%06d.jpg'%(self.remote_frame_dir, info_dict['frameID'])
+            print("Downloading %s"%remote_frame_path)
+            self.sftp.get(remote_frame_path, '%s/%06d.jpg'%(self.frame_dir, info_dict['frameID']))
+        
         frame = cv2_safe_read('%s/%06d.jpg'%(self.frame_dir, info_dict['frameID']))
         h, w, _ = frame.shape
         xmin, ymin, xmax, ymax = map(int, [info_dict['xmin']*w, info_dict['ymin']*h, info_dict['xmax']*w, info_dict['ymax']*h])
@@ -344,6 +356,8 @@ class PersonTracker:
 
         if Terminated:
             print("[WARNING] The tracking process is Terminated. Tracked data is dropped.")
+            print("[WARNING] From Interval %d to %d, On person %s, annotations are dropped"%(start_frame, end_frame, personID))
+            self.dropped_frames.append([start_frame, end_frame])
             return None
         
         proposal_df = proposal_df[proposal_df.personID==personID]
@@ -361,9 +375,13 @@ class PersonTracker:
         window = PopupWindow(head_at_end, "[Final Check]", personID)
         decision = window.get_result()
 
-        if decision=='No':
+        if decision=='No' or 'Terminate and Drop':
             print("[WARNING] Something went wrong in the middle! Unwanted head in the final. Tracked data is dropped")
+            print("[WARNING] From Interval %d to %d, On person %s, annotations are dropped"%(start_frame, end_frame, personID))
+            self.dropped_frames.append([start_frame, end_frame])
             return None
 
         return interpolated
-
+    
+    def get_dropped_frames(self):
+        return self.dropped_frames
