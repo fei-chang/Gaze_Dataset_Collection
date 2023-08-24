@@ -8,7 +8,7 @@ import numpy as np
 import cv2
 
 from utils import cv2_safe_read, cv2_safe_write
-cv2.des
+
 class PopupWindow:
     def __init__(self, img_array:np.array, stage: str, person_name:str):
         '''
