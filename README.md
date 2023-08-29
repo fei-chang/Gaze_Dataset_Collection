@@ -12,7 +12,7 @@
 
 **Source:** The dataset contains videos sampled from two existing dataset: [UCO-LAEO](https://github.com/AVAuco/ucolaeodb/) and [GazeCommunication](https://github.com/LifengFan/Human-Gaze-Communication)
 
-**Location:** The dataset currently save at `/home/changfei/X_Nas/data/GazeFollow_ours/GP_static`
+**Location:** The dataset currently save under `data/GazeFollow_ours/GP_static` in the public Nas of VIPL.
 
 **Additional Remarks:** The dataset is designed for the static gaze pattern classification task. Published with [Gaze Pattern Recognition in Dyadic Communication](https://dl.acm.org/doi/abs/10.1145/3588015.3588411).
 
@@ -22,23 +22,31 @@
 
 
 <details>
-<summary> GPCS (Under Construction)</summary>
+<summary> DyadicGaze (Under Construction)</summary>
 
-###  GPCS (Under Construction) 
-| # Vids | fps | multi-view | length per vid | # annotations | headbox | gaze point | gaze patterns | 
-|:------:|:---:|:----------:|:--------------:|:-------------:|:-------:|:----------:|:-------------:|
-|     |  |    |  |       |   |       |      |
+###  DyadicGaze (Under Construction) 
+| # Vids | fps | multi-view | length per vid | # annotations | headbox | gaze point | gaze patterns | eyes|
+|:------:|:---:|:----------:|:--------------:|:-------------:|:-------:|:----------:|:-------------:|:-------------:|
+|   325  | 25 |    ❌    | 6-20 seconds |    191,384   |  ✅   |   ✅      |    ✅    | ✅  |
 
 
 
 **Source:**  The dataset contains videos sampled from youtube, pexels and envatos.
 
-**Location:** The dataset currently save at 
+**Location:** The dataset currently save under `data/GazeFollow_ours/DyadicGaze` in the public Nas of VIPL. Annotations can be downloaded from [google drive](https://drive.google.com/file/d/1exCjzPXUDy65qv6HpCVcJL1eDssam_T8/view?usp=sharing)
 
 **Additional Remarks:**
 
-The dataset is designed for the static and dynamic gaze pattern classification task.
-
+The dataset is designed for the static and dynamic gaze pattern classification task. Detailed Information
+|          | Train | Test  | 
+|----------|-------|-------|
+| #vids    | 263   | 62    |
+| #frames  | 76099  | 19593 |
+|#Share|28370 (18.64%)|8332 (21.26%)|
+|#Mutual|23818 (15.65%)|7016 (17.90%)|
+|#Single|22419 (14.73%)|5886 (15.02%)|
+|#Miss|22423 (14.73%)|5884 (15.02%)|
+|#Void|55168 (36.25%)|12068 (30.80%)|
 </details>
 
 <details>
