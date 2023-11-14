@@ -1,5 +1,7 @@
 # Gaze Dataset Collection
 
+This repo contains general information on the datasets we collected for gaze-following and gaze pattern recognition tasks. It also introduce tools and some helper functions that we use in the collection and annotation process.
+
 ## Collected Dataset
 <details>
 <summary> GP-Static(Published)</summary>
@@ -74,8 +76,9 @@ The dataset is designed for the static and dynamic gaze pattern classification t
 
 <details>
 <summary> Head Detection </summary>
-  
-In repo [Tool_head_detector](https://github.com/fei-chang/Tool_head_detector/tree/main), used for detect heads in frames.
+
+In repo [YOLOv8_head_detector](https://github.com/Abcfsa/YOLOv8_head_detector), is a tool for detecting heads in frames.
+In repo [Tool_head_detector](https://github.com/fei-chang/Tool_head_detector/tree/main), is an old version of head detector based on yolov3 used for detecting heads in frames.
 
 </details>
 
