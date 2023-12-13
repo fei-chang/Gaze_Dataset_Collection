@@ -120,6 +120,15 @@ person_tracker.release()
 </details>
 
 <details>
+<summary> Visualization </summary>
+
+In script `Visualizer.py` defines a simple tool to visualize head bounding boxes, gaze points, gaze patterns, looking-at-camera predictions and emotions.
+
+</details>
+
+
+
+<details>
 <summary> Annotation Tool </summary>
   
 At [CVAT Online](http://43.138.12.230:8080/), used for create annotations on videos. Some helper functions can be found at `cvat_utils.py`
