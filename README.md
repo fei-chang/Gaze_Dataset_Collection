@@ -122,7 +122,32 @@ person_tracker.release()
 <details>
 <summary> Visualization </summary>
 
-In script `Visualizer.py` defines a simple tool to visualize head bounding boxes, gaze points, gaze patterns, looking-at-camera predictions and emotions.
+In script `Visualizer.py`, defines a simple tool to visualize head bounding boxes, gaze points, gaze patterns, looking-at-camera predictions and emotions.
+
+Usage:
+
+```python
+visualizer = Visualizer()
+
+# 1. Load in frames to visualize (either by list or by an entire folder
+visualizer.load_frames_from_dir(path_to_frame_directory, compression=0.6)
+
+# 2. Usage A: Draw bounding boxes:
+bbox_annotations = {}
+# The bbox_annotations should be a dictionary with the below format:
+bbox_annotations['img_path_1'] =  [bbox_xmin, bbox_ymin, bbox_xmax, bbox_xmax]  # bbox_xmin - bbox_ymax all in normalized 0 - 1
+visualizer.draw_bboxes(bbox_annotations, color_by='some_object_name', write_id=True) # This function will draw the bounding boxes with color 'color_by' attribute, as given by 'box_annotations'
+
+# 2. Usage B: Draw gaze 
+gaze_annotations = {}
+# The gaze_annotations should be a dictionary with the below format:
+gaze_annotations['img_path_1'] = [bbox_xmin, bbox_ymin, bbox_xmax, bbox_xmax, gaze_x, gaze_y, 'mutual(share/single/miss/void/none)'] # bbox_xmin - gaze_y all in normalized 0 - 1
+visualizer.draw_gaze_general(gaze_annotations, color_by='student', write_pattern=False) # This function will draw the head bounding boxes, gaze line, point and pattern as given by 'gaze_annotations'
+
+visualizer.generate_output_vid('visualize_sample_vids.mp4', fps=30)
+
+visualizer.empty_frames()
+```
 
 </details>
 
