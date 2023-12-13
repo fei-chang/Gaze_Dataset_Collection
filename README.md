@@ -156,7 +156,7 @@ visualizer.empty_frames()
 <details>
 <summary> Annotation Tool </summary>
   
-At [CVAT Online](http://43.138.12.230:8080/), used for create annotations on videos. Some helper functions can be found at `cvat_utils.py`
+VIPL组内CVAT平台：At [CVAT Online](http://43.138.12.230:8080/), used for create annotations on videos. Some helper functions can be found at `cvat_utils.py`
 
 Usage:
 1. Conver exported cvat annotation file to dictionary. (Exported format: CVAT for video 1.1)
@@ -167,6 +167,7 @@ info_dict = cvat2dict('path/to/cvat_annotations.xml')
 
 ```
 **Note**
+- 快速使用指南请参照：[VIPL组内CVAT快速使用指南.pdf](https://github.com/fei-chang/Gaze_Dataset_Collection/blob/main/VIPL%E7%BB%84%E5%86%85cvat%E5%BF%AB%E9%80%9F%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97.pdf)
 - 在使用网页（尤其是上传视频数据）时，建议关闭VPN，会卡顿。
 - Advanced Configuration中，建议不要选取 Use zip/video chunks 选项，该选项容易造成在视频在个别帧数间卡顿现象。
 - Advanced Configuration中，Segment Size控制每个Job的帧数，Chunk size则控制系统在分包时，每一个分开的压缩包中图像的数量。对于过长的视频，建议选取Segment Size进行控制每个Job的时长，同时每个Segment的时长应设为Chunck size的整数倍。
